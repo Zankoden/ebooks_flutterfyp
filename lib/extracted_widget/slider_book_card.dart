@@ -1,4 +1,4 @@
-import 'package:ebooks/details_page/views/single_details_page.dart';
+import 'package:ebooks/pages/details_page/views/single_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

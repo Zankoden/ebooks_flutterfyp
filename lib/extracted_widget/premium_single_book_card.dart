@@ -1,6 +1,6 @@
-import 'package:ebooks/home_page/controllers/home_page_controller.dart';
+import 'package:ebooks/pages/home_page/controllers/home_page_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:ebooks/details_page/views/single_details_page.dart';
+import 'package:ebooks/pages/details_page/views/single_details_page.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 

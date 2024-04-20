@@ -1,7 +1,7 @@
-import 'package:ebooks/explore_page/views/explore_page.dart';
-import 'package:ebooks/favourites_page/views/favourites_page.dart';
-import 'package:ebooks/home_page/views/home_page.dart';
-import 'package:ebooks/profile/views/profile_page.dart';
+import 'package:ebooks/pages/explore_page/views/explore_page.dart';
+import 'package:ebooks/pages/favourites_page/views/favourites_page.dart';
+import 'package:ebooks/pages/home_page/views/home_page.dart';
+import 'package:ebooks/pages/profile/views/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

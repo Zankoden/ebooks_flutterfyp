@@ -2,7 +2,7 @@ import 'package:ebooks/api/api_services.dart';
 import 'package:ebooks/constants/esewa.dart';
 import 'package:ebooks/constants/text_strings.dart';
 import 'package:ebooks/dash_board_screen.dart';
-import 'package:ebooks/profile/controllers/profile_controller.dart';
+import 'package:ebooks/pages/profile/controllers/profile_controller.dart';
 import 'package:esewa_flutter_sdk/esewa_config.dart';
 import 'package:esewa_flutter_sdk/esewa_flutter_sdk.dart';
 import 'package:esewa_flutter_sdk/esewa_payment.dart';

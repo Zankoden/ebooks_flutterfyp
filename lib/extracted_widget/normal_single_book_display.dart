@@ -1,8 +1,6 @@
 // import 'package:ebooks/details_page/controllers/single_book_details_controller.dart';
-import 'package:ebooks/details_page/views/single_details_page.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:ebooks/pages/details_page/views/single_details_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class NormalSingleBookCard extends StatelessWidget {

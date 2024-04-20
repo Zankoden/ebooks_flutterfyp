@@ -1,11 +1,11 @@
 class APIService {
   // ///emulator ip address fixed
-  // static const String baseURL =
-  //     'http://10.0.2.2/ebooks_point'; // Base URL of my API
+  static const String baseURL =
+      'http://10.0.2.2/ebooks_point'; // Base URL of my API
 
   ///home ip address fixed
-  static const String baseURL =
-      'http://192.168.1.70/ebooks_point'; // Base URL of my API
+  // static const String baseURL =
+  //     'http://192.168.1.70/ebooks_point'; // Base URL of my API
 
   ///college ip address
   // static const String baseURL =

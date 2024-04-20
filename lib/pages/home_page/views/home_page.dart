@@ -11,8 +11,8 @@ import 'package:ebooks/pages/home_page/controllers/home_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TestPage extends StatelessWidget {
-  TestPage({super.key});
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
   final HomePageController controller = Get.put(HomePageController());
 

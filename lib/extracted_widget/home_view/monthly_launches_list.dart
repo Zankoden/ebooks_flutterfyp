@@ -1,6 +1,6 @@
 import 'package:ebooks/constants/text_strings.dart';
 import 'package:ebooks/extracted_widget/premium_single_book_card.dart';
-import 'package:ebooks/home_page/controllers/home_page_controller.dart';
+import 'package:ebooks/pages/home_page/controllers/home_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +31,7 @@ class MonthlyLaunchesListView extends StatelessWidget {
           ]),
         ),
         SizedBox(
-          height: media.height * 1 / 2.2,
+          height: media.height * 1 / 2.0,
           child: Obx(
             () => ListView.builder(
               shrinkWrap: true,

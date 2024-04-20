@@ -28,7 +28,7 @@ class GenreListView extends StatelessWidget {
           ]),
         ),
         SizedBox(
-          height: media.width * 0.6,
+          height: media.width * 0.65,
           child: ListView.builder(
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
             scrollDirection: Axis.horizontal,
