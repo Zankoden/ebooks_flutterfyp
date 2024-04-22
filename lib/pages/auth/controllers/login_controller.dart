@@ -34,13 +34,10 @@ class LoginController extends GetxController {
         final userId = responseData['user_id'];
         await saveSession(userId);
 
-        // Start session timer
         _startSessionTimer();
 
-        // Navigate to dashboard screen
         Get.offAll(() => DashboardScreen());
       } else {
-        // Show error message
         final errorMessage = responseData['message'];
         if (errorMessage == 'Incorrect password.') {
           Get.snackbar('Error', 'Incorrect password.');
@@ -55,50 +52,11 @@ class LoginController extends GetxController {
         }
       }
     } on SocketException {
-      // Show error message for internet issues
       Get.snackbar('Error', 'Please check your internet connection.');
     } catch (e) {
-      // Show generic error message
       Get.snackbar('Error', 'An error occurred while logging in.');
     }
   }
-
-  // Future<void> loginUser() async {
-  //   const url = APIService.loginURL;
-  //   final response = await http.post(
-  //     Uri.parse(url),
-  //     body: json.encode({
-  //       'username': usernameController.text,
-  //       'password': passwordController.text,
-  //     }),
-  //     headers: {'Content-Type': 'application/json'},
-  //   );
-
-  //   final responseData = json.decode(response.body);
-
-  //   if (responseData['success']) {
-  //     Get.snackbar("Success", "Logged in Successfully");
-  //     final userId = responseData['user_id'];
-  //     await saveSession(userId);
-
-  //     const CircularProgressIndicator();
-
-  //     // Delay navigation for 3 seconds
-  //     // await Future.delayed(const Duration(seconds: 3));
-
-  //     _startSessionTimer();
-  //     Get.offAll(() => DashboardScreen());
-  //   } else {
-  //     // Show error message
-  //     Get.snackbar(
-  //       'Error',
-  //       responseData['message'],
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: Colors.red,
-  //       colorText: Colors.white,
-  //     );
-  //   }
-  // }
 
   Future<void> saveSession(int userId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -108,24 +66,21 @@ class LoginController extends GetxController {
   }
 
   void _startSessionTimer() {
-    const sessionDuration = Duration(days: 365); // Set session duration here
+    const sessionDuration = Duration(days: 365);
     _sessionTimer = Timer(sessionDuration, _logoutUser);
   }
 
   void _logoutUser() {
-    // Clear session data
     SharedPreferences.getInstance().then((prefs) {
       prefs.remove('user_id');
     });
 
-    // Navigate to login page
     Get.offAll(() => LoginPage());
   }
 
   @override
   void onClose() {
     super.onClose();
-    _sessionTimer
-        ?.cancel(); // Cancel the session timer when the controller is closed
+    _sessionTimer?.cancel();
   }
 }

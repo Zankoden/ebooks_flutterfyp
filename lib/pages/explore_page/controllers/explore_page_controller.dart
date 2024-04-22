@@ -12,10 +12,8 @@ class ExplorePageController extends GetxController {
   TextEditingController searchController = TextEditingController();
   RxList<Ebook> books = <Ebook>[].obs;
   RxList<Ebook> displayList = <Ebook>[].obs;
-  RxList<Ebook> searchOnlyItemsList =
-      <Ebook>[].obs; // New list for searched items
+  RxList<Ebook> searchOnlyItemsList = <Ebook>[].obs;
 
-  // for category filter
   RxList<Category> categories = <Category>[].obs;
 
   RxList<Ebook> premiumBooks = <Ebook>[].obs;
@@ -38,10 +36,8 @@ class ExplorePageController extends GetxController {
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         if (jsonData is List) {
-          // If the response is an array of ebooks
           return jsonData.map((ebook) => Ebook.fromJson(ebook)).toList();
         } else if (jsonData is Map) {
-          // If the response is a single ebook
           return [Ebook.fromJson(jsonData as Map<String, dynamic>)];
         } else {
           throw Exception('Invalid response format');
@@ -88,20 +84,17 @@ class ExplorePageController extends GetxController {
   }
 
   void updateList(String value) {
-    // Filter books based on the search query
     searchOnlyItemsList.value = books
         .where((element) =>
             element.title != null &&
             element.title!.toLowerCase().contains(value.toLowerCase()))
         .toList();
 
-    // Update displayList based on whether search text is present
     displayList.value = value.isEmpty ? books : searchOnlyItemsList;
   }
 
   void filterByCategory(String categoryName) {
     if (searchController.text.isEmpty) {
-      // Filter books from the main list if there's no search text
       displayList.value = books
           .where((element) =>
               element.categoryId ==
@@ -111,7 +104,6 @@ class ExplorePageController extends GetxController {
                   .categoryId)
           .toList();
     } else {
-      // Filter books based on the selected category from either the original list or searched list
       final List<Ebook> sourceList =
           searchOnlyItemsList.isNotEmpty ? searchOnlyItemsList : books;
       displayList.value = sourceList
@@ -125,14 +117,13 @@ class ExplorePageController extends GetxController {
     }
   }
 
-  ///recommended
   void getRecommendedBooks() {
     getBooks();
     log("--------start of getRecommendedBooks-----🔥------------");
     log("Recommended list: $recommendedBooksList");
     if (books.isEmpty) return;
 
-    recommendedBooksList.clear(); // Clear previous recommendations
+    recommendedBooksList.clear();
 
     for (Ebook ebook in books) {
       double totalRating = 0;
@@ -156,17 +147,13 @@ class ExplorePageController extends GetxController {
     log("Recommended list: $recommendedBooksList");
   }
 
-  ///recommended category
   void getRecommendedCategoryBooks() {
     log("-------------🔥----start of getRecommendedCategoryBooks--------");
     if (books.isEmpty) return;
 
-    Map<int, List<double>> categoryRatings =
-        {}; // Map to store average ratings for each category
-    Map<int, int> categoryBookCounts =
-        {}; // Map to store the count of books in each category
+    Map<int, List<double>> categoryRatings = {};
+    Map<int, int> categoryBookCounts = {};
 
-    // Calculate average rating and count for each category
     for (Ebook ebook in books) {
       int categoryId = ebook.categoryId ?? -1;
       double totalRating = 0;
@@ -182,7 +169,6 @@ class ExplorePageController extends GetxController {
       if (numRatings > 0) {
         double avgRating = totalRating / numRatings;
 
-        // Update categoryRatings and categoryBookCounts maps
         if (!categoryRatings.containsKey(categoryId)) {
           categoryRatings[categoryId] = [avgRating];
           categoryBookCounts[categoryId] = 1;
@@ -194,20 +180,17 @@ class ExplorePageController extends GetxController {
       }
     }
 
-    // Calculate average rating for each category
     for (int categoryId in categoryRatings.keys) {
       double avgRating = categoryRatings[categoryId]!.reduce((a, b) => a + b) /
           categoryRatings[categoryId]!.length;
       int bookCount = categoryBookCounts[categoryId]!;
 
       if (avgRating >= 4.0 && bookCount >= 3) {
-        // Consider categories with an average rating of 4.0 or higher and at least 3 books
         recommendedCategoryList
             .addAll(books.where((ebook) => ebook.categoryId == categoryId));
       }
     }
 
-    // Remove duplicates
     recommendedCategoryList = recommendedCategoryList.toSet().toList().obs;
 
     log("Recommended Category list: $recommendedCategoryList");

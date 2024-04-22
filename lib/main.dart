@@ -2,18 +2,15 @@ import 'package:ebooks/splash_screen/views/splash_screen_page.dart';
 import 'package:ebooks/themes/controller/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  // MobileAds.instance.initialize();
+  MobileAds.instance.initialize();
 
-  // SharedPreferences prefs = await SharedPreferences.getInstance();
-  // int? userId = prefs.getInt('user_id');
-
-  // Retrieve the existing instance of ThemeController
   ThemeController themeController = Get.put(ThemeController());
 
   runApp(MyApp(themeController: themeController));
@@ -49,7 +46,6 @@ class MyApp extends StatelessWidget {
               localizationsDelegates: const [
                 KhaltiLocalizations.delegate,
               ],
-              // home: userId != null ? DashboardScreen() : LoginPage(),
               home: SplashScreenPage(),
             );
           },

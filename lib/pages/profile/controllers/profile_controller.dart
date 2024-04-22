@@ -6,28 +6,8 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-// class UserInfo {
-//   final String userId;
-//   final String firstName;
-//   final String lastName;
-//   final String email;
-//   final String phoneNumber;
-//   final String profilePic;
-
-//   UserInfo({
-//     required this.userId,
-//     required this.firstName,
-//     required this.lastName,
-//     required this.email,
-//     required this.phoneNumber,
-//     required this.profilePic,
-//   });
-// }
-
 class ProfileController extends GetxController {
-  // Rx<UserInfo?> userInfo = Rx<UserInfo?>(null);
-  Rx<Map<String, dynamic>?> userInfo = Rx<Map<String, dynamic>?>(
-      null); // Change Rx type to Map<String, dynamic>?
+  Rx<Map<String, dynamic>?> userInfo = Rx<Map<String, dynamic>?>(null);
 
   @override
   void onInit() {
@@ -40,7 +20,6 @@ class ProfileController extends GetxController {
     int? userId = prefs.getInt('user_id');
 
     if (userId != null) {
-      // Clear userInfo
       userInfo.value = null;
 
       final response = await http.post(
@@ -50,13 +29,10 @@ class ProfileController extends GetxController {
         },
       );
 
-      // print(response.body);
-
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         if (data['success']) {
-          userInfo.value =
-              data['user_info']; // Update userInfo with fetched data
+          userInfo.value = data['user_info'];
         } else {
           log('Failed to get user info: ${data['message']}');
         }
@@ -78,14 +54,11 @@ class ProfileController extends GetxController {
         },
       );
 
-      // print(response.body);
-
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         if (data['success']) {
-          userInfo.value =
-              data['user_info']; // Update userInfo with fetched data
-          // Call getUserInfo to ensure the latest user info is fetched
+          userInfo.value = data['user_info'];
+
           await getUserInfo();
         } else {
           log('Failed to cancel subscription: ${data['message']}');

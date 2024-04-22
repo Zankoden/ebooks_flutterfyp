@@ -19,9 +19,6 @@ class SingleBookDetailsController extends GetxController {
     super.onInit();
     super.onInit();
     fetchBooksAndRecommendations();
-    // getBooks();
-    // getRecommendedBooks();
-    // getRecommendedCategoryBooks();
   }
 
   Future<void> fetchBooksAndRecommendations() async {
@@ -43,12 +40,10 @@ class SingleBookDetailsController extends GetxController {
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         if (jsonData is List) {
-          // If the response is an array of ebooks
           return jsonData.map((ebookData) {
             return Ebook.fromJson(ebookData);
           }).toList();
         } else if (jsonData is Map) {
-          // If the response is a single ebook
           return [Ebook.fromJson(jsonData as Map<String, dynamic>)];
         } else {
           throw Exception('Invalid response format');
@@ -70,7 +65,6 @@ class SingleBookDetailsController extends GetxController {
     }
   }
 
-  ///recommended
   void getRecommendedBooks() {
     getBooks();
     log("Single Fetch books list: $books");
@@ -78,7 +72,7 @@ class SingleBookDetailsController extends GetxController {
     log("Recommended list: $recommendedBooksList");
     if (books.isEmpty) return;
 
-    recommendedBooksList.clear(); // Clear previous recommendations
+    recommendedBooksList.clear();
 
     for (Ebook ebook in books) {
       double totalRating = 0;
@@ -102,17 +96,13 @@ class SingleBookDetailsController extends GetxController {
     log("Recommended list: $recommendedBooksList");
   }
 
-  ///recommended category
   void getRecommendedCategoryBooks() {
     log("-------------🔥----start of getRecommendedCategoryBooks--------");
     if (books.isEmpty) return;
 
-    Map<int, List<double>> categoryRatings =
-        {}; // Map to store average ratings for each category
-    Map<int, int> categoryBookCounts =
-        {}; // Map to store the count of books in each category
+    Map<int, List<double>> categoryRatings = {};
+    Map<int, int> categoryBookCounts = {};
 
-    // Calculate average rating and count for each category
     for (Ebook ebook in books) {
       int categoryId = ebook.categoryId ?? -1;
       double totalRating = 0;
@@ -128,7 +118,6 @@ class SingleBookDetailsController extends GetxController {
       if (numRatings > 0) {
         double avgRating = totalRating / numRatings;
 
-        // Update categoryRatings and categoryBookCounts maps
         if (!categoryRatings.containsKey(categoryId)) {
           categoryRatings[categoryId] = [avgRating];
           categoryBookCounts[categoryId] = 1;
@@ -140,20 +129,17 @@ class SingleBookDetailsController extends GetxController {
       }
     }
 
-    // Calculate average rating for each category
     for (int categoryId in categoryRatings.keys) {
       double avgRating = categoryRatings[categoryId]!.reduce((a, b) => a + b) /
           categoryRatings[categoryId]!.length;
       int bookCount = categoryBookCounts[categoryId]!;
 
       if (avgRating >= 4.0 && bookCount >= 3) {
-        // Consider categories with an average rating of 4.0 or higher and at least 3 books
         recommendedCategoryList
             .addAll(books.where((ebook) => ebook.categoryId == categoryId));
       }
     }
 
-    // Remove duplicates
     recommendedCategoryList = recommendedCategoryList.toSet().toList().obs;
 
     recommendedCategoryList.shuffle();

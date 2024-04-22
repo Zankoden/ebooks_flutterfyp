@@ -19,7 +19,6 @@ class Category {
   }
 }
 
-// doing json maping directly here instead of controller:
 List<Category> categoryFromJson(String str) =>
     List<Category>.from(json.decode(str).map((x) => Category.fromJson(x)));
 

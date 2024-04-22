@@ -14,7 +14,6 @@ class GenreDisplayCard extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
             color: bgcolor, borderRadius: BorderRadius.circular(15)),
-        // color: Colors.red,
         width: media.width * 0.7,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -36,8 +36,6 @@ class EditProfilePageController extends GetxController {
         },
       );
 
-      // print("The edit res: ${response.body}");
-
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         if (data['success']) {

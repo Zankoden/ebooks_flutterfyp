@@ -2,7 +2,7 @@ import 'package:ebooks/pages/auth/controllers/register_controller.dart';
 import 'package:ebooks/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'login_page.dart'; // Import the LoginPage
+import 'login_page.dart';
 
 class RegistrationPage extends StatelessWidget {
   final RegistrationController _registrationController =
@@ -143,7 +143,6 @@ class RegistrationPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Text widget for already registered users
             GestureDetector(
               onTap: () {
                 Get.off(() => LoginPage());

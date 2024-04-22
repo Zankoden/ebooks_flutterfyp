@@ -13,7 +13,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Esewa {
-  
   pay(String plan) {
     try {
       EsewaFlutterSdk.initPayment(
@@ -29,44 +28,38 @@ class Esewa {
         ),
         onPaymentSuccess: (EsewaPaymentSuccessResult data) async {
           debugPrint(":::SUCCESS::: => $data");
-          // verifyTransactionStatus(data);
-          
-       
+
           Get.snackbar(
-                    ZText.zResult,
-                    ZText.zPaymentSuccessful,
-                    snackPosition: SnackPosition.BOTTOM,
-                  );
+            ZText.zResult,
+            ZText.zPaymentSuccessful,
+            snackPosition: SnackPosition.BOTTOM,
+          );
 
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  int? userId = prefs.getInt('user_id');
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          int? userId = prefs.getInt('user_id');
 
-                  // Send a POST request to  API
-                  var response = await http.post(
-                    Uri.parse(APIService.membershipURL),
-                    body: {
-                      'user_id': userId.toString(),
-                      'plan': plan.toString(),
-                    },
-                  );
+          var response = await http.post(
+            Uri.parse(APIService.membershipURL),
+            body: {
+              'user_id': userId.toString(),
+              'plan': plan.toString(),
+            },
+          );
 
-                  // Check if the request was successful
-                  if (response.statusCode == 200) {
-                    Get.find<ProfileController>().getUserInfo();
-                    Get.snackbar(
-                      ZText.zResult,
-                      ZText.zSubscriptionSuccessful,
-                      snackPosition: SnackPosition.BOTTOM,
-                    );
-                  } else {
-                    Get.snackbar(
-                      ZText.zResult,
-                      ZText.zSubscriptionFailed,
-                    );
-                  }
-                  Get.offAll(DashboardScreen());
-          ///
+          if (response.statusCode == 200) {
+            Get.find<ProfileController>().getUserInfo();
+            Get.snackbar(
+              ZText.zResult,
+              ZText.zSubscriptionSuccessful,
+              snackPosition: SnackPosition.BOTTOM,
+            );
+          } else {
+            Get.snackbar(
+              ZText.zResult,
+              ZText.zSubscriptionFailed,
+            );
+          }
+          Get.offAll(DashboardScreen());
         },
         onPaymentFailure: (data) {
           debugPrint(":::FAILURE::: => $data");

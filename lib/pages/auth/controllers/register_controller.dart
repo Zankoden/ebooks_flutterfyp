@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RegistrationController extends GetxController {
-  var userType = 'Normal'.obs; // Default user type is 'Normal'
+  var userType = 'Normal'.obs;
 
   Future<Map<String, dynamic>> registerUser({
     required String firstName,
@@ -13,7 +13,7 @@ class RegistrationController extends GetxController {
     required String email,
     required String phoneNumber,
     required String password,
-    required String userType, // Changed from bool to String
+    required String userType,
   }) async {
     const String url = APIService.registerURL;
 
@@ -26,7 +26,7 @@ class RegistrationController extends GetxController {
         'email': email,
         'phone_number': phoneNumber,
         'password': password,
-        'type': userType, // Changed from 'is_author' to 'type'
+        'type': userType,
       },
     );
 

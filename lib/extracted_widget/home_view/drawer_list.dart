@@ -29,10 +29,8 @@ class DrawerListWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    // margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 15),
-    
                     child: GestureDetector(
                       onTap: () {},
                       child: Row(
@@ -42,14 +40,12 @@ class DrawerListWidget extends StatelessWidget {
                             onPressed: () {},
                             icon: const Icon(
                               Icons.settings,
-                              // color: TColor.subTitle,
                               size: 25,
                             ),
                           ),
                           const Text(
                             "Hi",
                             style: TextStyle(
-                                // color: Colors.white,
                                 color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700),

@@ -18,14 +18,6 @@ class ExplorePage extends StatelessWidget {
           children: [
             Text(ZText.zExplore),
             Expanded(child: SizedBox()),
-            // InkWell(
-            //   onTap: () {
-            //     // Get.to(() => ProfilePage());
-            //   },
-            //   child: const Row(
-            //     children: [CircleAvatar(child: Icon(Icons.person))],
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -139,7 +131,6 @@ class ExplorePage extends StatelessWidget {
   }
 }
 
-///
 class SearchGridCell extends StatelessWidget {
   final int index;
 
@@ -178,11 +169,8 @@ class SearchGridCell extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          // color: TColor.searchBGColor[index % TColor.searchBGColor.length],
           borderRadius: BorderRadius.circular(15),
-          // border: Border.all(),
         ),
-        // padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 4),
         child: Column(
           children: [
             ClipRRect(
@@ -210,10 +198,7 @@ class SearchGridCell extends StatelessWidget {
               bookName,
               maxLines: 1,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                  // color: Colors.black,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700),
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
             ),
           ],
         ),

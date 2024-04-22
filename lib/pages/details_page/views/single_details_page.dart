@@ -25,9 +25,6 @@ class SingleBookDetails extends StatelessWidget {
   final SingleBookDetailsController singleBookDetailsController =
       Get.put(SingleBookDetailsController());
 
-  // final ExplorePageController explorePageController =
-  //     Get.put(ExplorePageController());
-
   SingleBookDetails({
     super.key,
     required this.bookName,
@@ -48,12 +45,11 @@ class SingleBookDetails extends StatelessWidget {
         title: Text(bookName),
       ),
       body: FutureBuilder(
-        future: Future.delayed(
-            const Duration(seconds: 2)), // Simulating 5-second loading
+        future: Future.delayed(const Duration(seconds: 2)),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(), // Loading indicator
+              child: CircularProgressIndicator(),
             );
           } else {
             return SingleChildScrollView(
@@ -62,7 +58,6 @@ class SingleBookDetails extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Existing content here...
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
@@ -106,7 +101,6 @@ class SingleBookDetails extends StatelessWidget {
                                     Obx(
                                       () => IconButton(
                                         onPressed: () {
-                                          // Pass the ebookId to the toggleFavorite method
                                           favouritesController
                                               .toggleFavorite(ebookID);
                                         },
@@ -122,9 +116,8 @@ class SingleBookDetails extends StatelessWidget {
                                       onPressed: () async {
                                         if (pdfFilePath.isNotEmpty) {
                                           controller.showInterstitialAd();
-                                          await Future.delayed(const Duration(
-                                              seconds:
-                                                  1)); // Adjust delay time if needed
+                                          await Future.delayed(
+                                              const Duration(seconds: 1));
                                           Get.to(() =>
                                               PdfViewPage(pdfUrl: pdfFilePath));
                                         } else {
@@ -160,7 +153,6 @@ class SingleBookDetails extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     const Text(
                       ZText.zDescription,
                       style: TextStyle(
@@ -170,10 +162,8 @@ class SingleBookDetails extends StatelessWidget {
                     ),
                     ShowMoreText(
                       text: description,
-                      maxLength: 200, // Specify your desired maximum length
+                      maxLength: 200,
                     ),
-
-                    // Recommended Category Books Section
                     const SizedBox(height: 20),
                     if (singleBookDetailsController
                         .recommendedCategoryList.isNotEmpty) ...[
@@ -196,7 +186,6 @@ class SingleBookDetails extends StatelessWidget {
                                   .recommendedCategoryList[index];
 
                               return NormalSingleBookCard(
-                                // index: index, // Pass the current index
                                 bookName: ebook.title ?? '',
                                 imagePath: ebook.thumbnailUrl ?? '',
                                 pdfFilePath: ebook.pdfUrl ?? '',
@@ -209,7 +198,6 @@ class SingleBookDetails extends StatelessWidget {
                         ),
                       ),
                     ],
-
                     const SizedBox(height: 10),
                     if (singleBookDetailsController
                         .recommendedBooksList.isNotEmpty) ...[
@@ -231,7 +219,6 @@ class SingleBookDetails extends StatelessWidget {
                               final ebook = singleBookDetailsController
                                   .recommendedBooksList[index];
                               return NormalSingleBookCard(
-                                // index: index, // Pass the current index
                                 bookName: ebook.title ?? '',
                                 imagePath: ebook.thumbnailUrl ?? '',
                                 pdfFilePath: ebook.pdfUrl ?? '',
@@ -290,15 +277,13 @@ class PdfViewPage extends StatelessWidget {
                 onPageError: (page, error) {
                   log('$page: ${error.toString()}');
                 },
-                onViewCreated: (PDFViewController pdfViewController) {
-                  // Store the controller for later use
-                },
+                onViewCreated: (PDFViewController pdfViewController) {},
               );
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-          // Handle other connection states (e.g., active, none)
+
           return const Center(child: Text(ZText.zPDFLoading));
         },
       ),

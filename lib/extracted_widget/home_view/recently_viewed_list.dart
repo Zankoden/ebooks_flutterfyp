@@ -23,10 +23,7 @@ class RecentlyViewedListView extends StatelessWidget {
             children: [
               Text(
                 ZText.zRecentlyViewed,
-                style: TextStyle(
-                    // color: Color(0xff212121),
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
               )
             ],
           ),

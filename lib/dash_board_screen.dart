@@ -28,32 +28,6 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // endDrawer: Drawer(
-      //   child: Container(
-      //     height: 100,
-      //     width: 100,
-      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-      //     child: ListView(
-      //       children: [
-      //         ListTile(
-      //           title: const Text('Drawer Item 1'),
-      //           onTap: () {
-      //             // Implement action for drawer item 1
-      //             Get.back(); // Close the drawer
-      //           },
-      //         ),
-      //         ListTile(
-      //           title: const Text('Drawer Item 2'),
-      //           onTap: () {
-      //             // Implement action for drawer item 2
-      //             Get.back(); // Close the drawer
-      //           },
-      //         ),
-      //         // Add more ListTile widgets for additional drawer items
-      //       ],
-      //     ),
-      //   ),
-      // ),
       body: Obx(
         () => IndexedStack(
           index: controller.currentIndex.value,

@@ -26,14 +26,6 @@ class AppBarWidget extends StatelessWidget {
       ),
       leading: Container(),
       leadingWidth: 1,
-      // actions: [
-      //   IconButton(
-      //     onPressed: () {
-      //       controller.openDrawer();
-      //     },
-      //     icon: const Icon(Icons.menu),
-      //   )
-      // ],
     );
   }
 }

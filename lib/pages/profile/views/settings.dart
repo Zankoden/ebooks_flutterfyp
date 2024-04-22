@@ -49,9 +49,7 @@ class SettingsPage extends StatelessWidget {
                     const Icon(Iconsax.moon),
                     const SizedBox(width: 15),
                     const Text("Switch Modes"),
-                    // const SizedBox(width: 180),
                     const SizedBox(width: 30),
-                    // Icon(Iconsax.toggle_off),
                     Obx(
                       () => DropdownButton<ThemeMode>(
                         value: themeController.themeMode.value,

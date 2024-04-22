@@ -2,8 +2,6 @@ import 'package:ebooks/pages/details_page/views/single_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// SliderBookCard method class widget
-
 class SliderBookCard extends StatelessWidget {
   const SliderBookCard({
     super.key,
@@ -83,10 +81,8 @@ class SliderBookCard extends StatelessWidget {
                 bookName,
                 maxLines: 1,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                    // color: Color(0xff212121),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700),
+                style:
+                    const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
@@ -94,7 +90,6 @@ class SliderBookCard extends StatelessWidget {
                 maxLines: 1,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  // color: const Color(0xff212121).withOpacity(0.4),
                   fontSize: 11,
                 ),
                 overflow: TextOverflow.ellipsis,

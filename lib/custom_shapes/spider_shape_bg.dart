@@ -21,9 +21,9 @@ class SpiderClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
 
-    // Start from top center
+    
     path.moveTo(size.width / 2, 0);
-    // Draw curves for spider shape
+    
     path.quadraticBezierTo(size.width * 0.35, size.height * 0.2,
         size.width * 0.1, size.height * 0.4);
     path.quadraticBezierTo(size.width * 0.2, size.height * 0.6,

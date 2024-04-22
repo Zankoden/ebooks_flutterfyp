@@ -90,7 +90,7 @@ class ProfilePage extends StatelessWidget {
                           '${ZText.zFirstName}: ${userInfo['first_name']}',
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18, // Adjusted text size
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -105,7 +105,7 @@ class ProfilePage extends StatelessWidget {
                           '${ZText.zLastName}: ${userInfo['last_name']}',
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18, // Adjusted text size
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -120,7 +120,7 @@ class ProfilePage extends StatelessWidget {
                           '${ZText.zEmail}: ${userInfo['email']}',
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18, // Adjusted text size
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -135,7 +135,7 @@ class ProfilePage extends StatelessWidget {
                           '${ZText.zPhoneNumber}: ${userInfo['phone_number']}',
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18, // Adjusted text size
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -150,7 +150,7 @@ class ProfilePage extends StatelessWidget {
                           '${ZText.zRole}: ${userInfo['role']}',
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18, // Adjusted text size
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -165,7 +165,7 @@ class ProfilePage extends StatelessWidget {
                           '${ZText.zPlan}: ${userInfo['plan'] ?? 'Free Plan'}',
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18, // Adjusted text size
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -185,7 +185,6 @@ class ProfilePage extends StatelessWidget {
                       text: ZText.zCancelSubscription,
                       icon: Icons.cancel,
                       onTap: () {
-                        // Show cancellation dialog
                         Get.dialog(
                           AlertDialog(
                             title: const Text(ZText.zConfirmAction),
@@ -248,8 +247,7 @@ class ProfilePage extends StatelessWidget {
             ],
             const SizedBox(height: 20),
             SizedBox(
-              width:
-                  double.infinity, // Make buttons take full width of the screen
+              width: double.infinity,
               child: Row(
                 children: [
                   Expanded(
@@ -318,17 +316,15 @@ class ProfilePage extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 20, vertical: 15), // Adjusted button padding
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-              30), // Increased border radius for a rounded appearance
+          borderRadius: BorderRadius.circular(30),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: const Offset(0, 3), // Added shadow for a raised effect
+              offset: const Offset(0, 3),
             ),
           ],
           gradient: gradient,
@@ -339,14 +335,14 @@ class ProfilePage extends StatelessWidget {
             Icon(
               icon,
               color: Colors.white,
-              size: 20, // Adjusted icon size
+              size: 20,
             ),
             const SizedBox(width: 10),
             Text(
               text,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 18, // Adjusted text size
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),

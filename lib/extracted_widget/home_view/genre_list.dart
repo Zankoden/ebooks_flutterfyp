@@ -20,10 +20,7 @@ class GenreListView extends StatelessWidget {
           child: const Row(children: [
             Text(
               "Genres",
-              style: TextStyle(
-                  // color: Color(0xff212121),
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             )
           ]),
         ),

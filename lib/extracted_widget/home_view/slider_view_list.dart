@@ -17,15 +17,14 @@ class SliderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.getBooks();
     return SizedBox(
       width: media.width,
       height: media.width * 0.8,
       child: CarouselSlider.builder(
         itemCount: controller.books.length,
-        itemBuilder: (BuildContext context,
-            int itemIndex, int pageViewIndex) {
-          if (itemIndex >= 0 &&
-              itemIndex < controller.books.length) {
+        itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
+          if (itemIndex >= 0 && itemIndex < controller.books.length) {
             var ebook = controller.books[itemIndex];
             return SliderBookCard(
               bookName: ebook.title ?? '',
@@ -46,8 +45,7 @@ class SliderView extends StatelessWidget {
           enlargeCenterPage: true,
           viewportFraction: 0.45,
           enlargeFactor: 0.4,
-          enlargeStrategy:
-              CenterPageEnlargeStrategy.zoom,
+          enlargeStrategy: CenterPageEnlargeStrategy.zoom,
         ),
       ),
     );

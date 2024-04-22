@@ -40,10 +40,9 @@ class TestPage extends StatelessWidget {
 
     return Scaffold(
       endDrawer: const DrawerListWidget(),
-      // backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: media.height * 4.46, // fix it with dynamic list value
+          height: media.height * 4.46,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

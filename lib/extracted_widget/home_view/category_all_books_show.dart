@@ -38,15 +38,12 @@ class CategoryBooksListView extends StatelessWidget {
                       Text(
                         category.categoryName ?? ZText.zNSorryFailedToLoad,
                         style: const TextStyle(
-                            // color: Color(0xff212121),
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700),
+                            fontSize: 22, fontWeight: FontWeight.w700),
                       )
                     ]),
                   ),
                 ),
                 SizedBox(
-                  // height: media.height * 1 / 2.2,
                   height: 305,
                   child: ListView.builder(
                     padding:

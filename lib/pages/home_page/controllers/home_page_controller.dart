@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:ebooks/model/ebook_model.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-// import 'package:path_provider/path_provider.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 const int maxFailedLoadAttempts = 3;
@@ -83,13 +83,10 @@ class HomePageController extends GetxController {
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         if (jsonData is List) {
-          // If the response is an array of ebooks
           return jsonData
               .map((ebookJson) => Ebook.fromJson(ebookJson))
               .toList();
         } else if (jsonData is Map) {
-          // If the response is a single ebook
-
           return [Ebook.fromJson(jsonData as Map<String, dynamic>)];
         } else {
           throw Exception('Invalid response format');
@@ -118,13 +115,10 @@ class HomePageController extends GetxController {
         },
       );
 
-      // print(response.body);
-
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         if (data['success']) {
-          userInfo.value =
-              data['user_info']; // Update userInfo with fetched data
+          userInfo.value = data['user_info'];
           log("Test home user: ${userInfo.value}");
         } else {
           log('Failed to get user info: ${data['message']}');
@@ -137,11 +131,9 @@ class HomePageController extends GetxController {
 
   Future<void> getBooks() async {
     try {
-      // Await the result of fetchEbooks()
       List<Ebook> fetchedBooks = await fetchEbooks();
-      // Assign the fetchedBooks to books.value
+
       books.value = fetchedBooks;
-      // print("My Books $books");
     } catch (e) {
       log("$e");
     }
@@ -151,21 +143,17 @@ class HomePageController extends GetxController {
     try {
       books.value = await fetchEbooks();
 
-      // Filter books uploaded in the current month
       final currentDate = DateTime.now();
-      final currentMonth =
-          DateFormat('MM').format(currentDate); // Get the current month
-      final currentYear =
-          DateFormat('yyyy').format(currentDate); // Get the current year
+      final currentMonth = DateFormat('MM').format(currentDate);
+      final currentYear = DateFormat('yyyy').format(currentDate);
       final currentMonthBooks = books.where((book) {
-        final uploadedDate = book.uploadedDate; // Access uploadedDate property
+        final uploadedDate = book.uploadedDate;
         final uploadDate =
             DateFormat('MM-yyyy').format(DateTime.parse(uploadedDate!));
 
         return uploadDate == '$currentMonth-$currentYear';
       }).toList();
 
-      // Assign filtered books to premiumBooks
       premiumBooks.value = currentMonthBooks;
     } catch (e) {
       log("$e");
@@ -178,7 +166,6 @@ class HomePageController extends GetxController {
 
       log("Fetch category: ${response.body} ");
       if (response.statusCode == 200) {
-        // var jsonData = jsonDecode(response.body) as List<dynamic>;
         var jsonData = jsonDecode(response.body);
         return categoryFromJson(jsonEncode(jsonData));
       } else {
@@ -191,20 +178,17 @@ class HomePageController extends GetxController {
   }
 
   Future<void> getCategories() async {
-    // Add this method
     try {
       categories.value = await fetchCategories();
     } catch (e) {
       log("$e");
     }
-    // print("My categories $categories");
   }
 
   void addToRecentlyViewed(Ebook ebook) {
     recentlyViewedBooks.add(ebook);
   }
 
-  ///for drawer
   RxBool isDrawerOpen = false.obs;
 
   void openDrawer() {
@@ -214,39 +198,4 @@ class HomePageController extends GetxController {
   void closeDrawer() {
     isDrawerOpen.value = false;
   }
-
-  ///cache functionality
-
-  // Future openBox() async {
-  //   var dir = await getApplicationDocumentsDirectory();
-  //   Hive.init(dir.path);
-  //   box = await Hive.openBox('data');
-  //   return;
-  // }
-
-  // getAllData() async {
-  //   // SocketException("message");
-  //   await openBox();
-
-  //   String url = APIService.baseURL;
-  //   try {
-  //     var response = await http.get(Uri.parse(url));
-  //     var _jsonDecode = jsonDecode(response.body);
-  //     await putData(jsonDecode);
-  //   } catch (SocketException) {
-  //     log("No Internet");
-  //   }
-
-  //   //get data from DB
-  //   var myMap = box.toMap().values.toList();
-  //   if (myMap.isEmpty) {
-  //   } else {}
-  // }
-
-  // Future putData(data) async {
-  //   await box.clear();
-  //   for (var d in data) {
-  //     box.add(d);
-  //   }
-  // }
 }

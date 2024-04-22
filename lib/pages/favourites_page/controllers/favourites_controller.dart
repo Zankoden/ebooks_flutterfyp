@@ -12,7 +12,7 @@ class FavouritesController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Fetch books when the controller is initialized
+
     fetchFavoriteBooks();
   }
 
@@ -23,26 +23,20 @@ class FavouritesController extends GetxController {
 
       log("Ebook id fav add: $ebookID");
 
-      // Convert ebookId to String
       String ebookIdString = ebookID.toString();
 
-      // Send a request to add or remove the ebook from favorites in the database
       var response = await http.post(
         Uri.parse('${APIService.baseURL}/add_remove_favorite.php'),
         body: {
-          'ebook_id': ebookIdString, // Use the ebook_id of the clicked ebook
-          'user_id': userId.toString(), // Convert userId to String
-          'action': isFavorite.value
-              ? 'remove'
-              : 'add', // Toggle action based on isFavorite value
+          'ebook_id': ebookIdString,
+          'user_id': userId.toString(),
+          'action': isFavorite.value ? 'remove' : 'add',
         },
       );
 
       if (response.statusCode == 200) {
-        // Update the isFavorite state based on the response
         isFavorite.value = !isFavorite.value;
-        favoriteBooks
-            .clear(); // cleared and called the fetching method so that It shows live list on navigating
+        favoriteBooks.clear();
         fetchFavoriteBooks();
       } else {
         throw Exception('Failed to toggle favorite status');
@@ -68,24 +62,20 @@ class FavouritesController extends GetxController {
       log("The body fav fetch: ${response.body}");
 
       if (response.statusCode == 200) {
-        // Parse the response JSON
         List<dynamic> data = json.decode(response.body);
         List<Map<String, dynamic>> parsedData = [];
 
-        // Process each item in the response data
         for (var item in data) {
-          // Create a map for each item with the desired keys
           Map<String, dynamic> bookMap = {
             'bookName': item['title'] ?? '',
             'imagePath': "${APIService.baseURL}/${item['thumbnail_url']}",
             'pdfFilePath': "${APIService.baseURL}/${item['pdf_url']}",
             'ebookID': item['ebook_id'] ?? '',
           };
-          // Add the processed item to the parsedData list
+
           parsedData.add(bookMap);
         }
 
-        // Assign the parsed data to favoriteBooks
         favoriteBooks.assignAll(parsedData);
       } else {
         throw Exception('Failed to fetch favorite books');

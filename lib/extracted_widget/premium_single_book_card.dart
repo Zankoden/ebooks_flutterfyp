@@ -52,7 +52,6 @@ class PremiumSingleBookCard extends StatelessWidget {
       },
       child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 12),
-          // color: Colors.red,
           width: media.width * 0.32,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -102,9 +101,7 @@ class PremiumSingleBookCard extends StatelessWidget {
                       maxLines: 1,
                       textAlign: TextAlign.left,
                       style: const TextStyle(
-                          // color: Color(0xff212121),
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700),
+                          fontSize: 13, fontWeight: FontWeight.w700),
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(
@@ -115,7 +112,6 @@ class PremiumSingleBookCard extends StatelessWidget {
                       maxLines: 1,
                       textAlign: TextAlign.left,
                       style: const TextStyle(
-                        // color: const Color(0xff212121).withOpacity(0.4),
                         fontSize: 11,
                       ),
                       overflow: TextOverflow.ellipsis,
