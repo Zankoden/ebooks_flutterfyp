@@ -4,7 +4,6 @@ import 'package:ebooks/extracted_widget/home_view/category_all_books_show.dart';
 import 'package:ebooks/extracted_widget/home_view/drawer_list.dart';
 import 'package:ebooks/extracted_widget/home_view/genre_list.dart';
 import 'package:ebooks/extracted_widget/home_view/monthly_launches_list.dart';
-import 'package:ebooks/extracted_widget/home_view/recently_viewed_list.dart';
 import 'package:ebooks/extracted_widget/home_view/slider_view_list.dart';
 import 'package:ebooks/extracted_widget/s_curve_shape_widget.dart';
 import 'package:ebooks/pages/home_page/controllers/home_page_controller.dart';
@@ -41,8 +40,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       endDrawer: const DrawerListWidget(),
       body: SingleChildScrollView(
-        child: SizedBox(
-          height: media.height * 4.46,
+        child: Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -82,8 +80,8 @@ class HomePage extends StatelessWidget {
                       SizedBox(
                         height: media.width * 0.1,
                       ),
-                      RecentlyViewedListView(
-                          media: media, controller: controller),
+                      // RecentlyViewedListView(
+                      //     media: media, controller: controller),
                     ],
                   ),
                 ],

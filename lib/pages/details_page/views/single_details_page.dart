@@ -117,7 +117,8 @@ class SingleBookDetails extends StatelessWidget {
                                         if (pdfFilePath.isNotEmpty) {
                                           controller.showInterstitialAd();
                                           await Future.delayed(
-                                              const Duration(seconds: 1));
+                                            const Duration(seconds: 1),
+                                          );
                                           Get.to(() =>
                                               PdfViewPage(pdfUrl: pdfFilePath));
                                         } else {
@@ -242,6 +243,58 @@ class SingleBookDetails extends StatelessWidget {
   }
 }
 
+// class PdfViewPage extends StatelessWidget {
+//   final String pdfUrl;
+
+//   const PdfViewPage({super.key, required this.pdfUrl});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text(ZText.zPDFViewer),
+//       ),
+//       body: FutureBuilder(
+//         future: DefaultCacheManager().getSingleFile(pdfUrl),
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.done) {
+//             if (snapshot.hasError) {
+//               log("second if mai adkiyo pdf");
+//               return Center(child: Text('Error: ${snapshot.error}'));
+//             } else if (snapshot.data is File) {
+//               log("aayo aayo pdf aayo");
+//               File pdfFile = snapshot.data as File;
+//               return PDFView(
+//                 filePath: pdfFile.path,
+//                 enableSwipe: true,
+//                 swipeHorizontal: false,
+//                 autoSpacing: false,
+//                 pageSnap: true,
+//                 pageFling: false,
+//                 onRender: (pages) {
+//                   log("PDF rendered");
+//                 },
+//                 onError: (error) {
+//                   log(error.toString());
+//                 },
+//                 onPageError: (page, error) {
+//                   log('$page: ${error.toString()}');
+//                 },
+//                 onViewCreated: (PDFViewController pdfViewController) {},
+//               );
+//             }
+//           } else if (snapshot.connectionState == ConnectionState.waiting) {
+//             log("First else mai askiyo pdf");
+//             return const Center(child: CircularProgressIndicator());
+//           }
+
+//           return const Center(child: Text(ZText.zPDFLoading));
+//         },
+//       ),
+//     );
+//   }
+// }
+
 class PdfViewPage extends StatelessWidget {
   final String pdfUrl;
 
@@ -254,13 +307,18 @@ class PdfViewPage extends StatelessWidget {
         title: const Text(ZText.zPDFViewer),
       ),
       body: FutureBuilder(
-        future: DefaultCacheManager().getSingleFile(pdfUrl),
+        future: _fetchPdfFile(pdfUrl),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (snapshot.data is File) {
-              File pdfFile = snapshot.data as File;
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            log("First if mai adkiyo pdf");
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            log("second else if ma adkiyo pdf");
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            log("else ma aayo, aayo pdf aayo");
+            File? pdfFile = snapshot.data;
+            if (pdfFile != null) {
               return PDFView(
                 filePath: pdfFile.path,
                 enableSwipe: true,
@@ -279,14 +337,21 @@ class PdfViewPage extends StatelessWidget {
                 },
                 onViewCreated: (PDFViewController pdfViewController) {},
               );
+            } else {
+              return const Center(child: Text(ZText.zPDFLoading));
             }
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
           }
-
-          return const Center(child: Text(ZText.zPDFLoading));
         },
       ),
     );
+  }
+
+  Future<File?> _fetchPdfFile(String pdfUrl) async {
+    try {
+      return await DefaultCacheManager().getSingleFile(pdfUrl);
+    } catch (e) {
+      log('Error fetching PDF file: $e');
+      return null;
+    }
   }
 }

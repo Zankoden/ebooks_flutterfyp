@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,5 +8,6 @@ class ThemeController extends GetxController {
 
   void changeTheme(ThemeMode mode) {
     themeMode.value = mode;
+    log("The theme: ${themeMode.value}");
   }
 }

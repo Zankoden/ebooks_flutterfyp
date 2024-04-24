@@ -1,10 +1,11 @@
 import 'package:ebooks/api/api_services.dart';
+import 'package:ebooks/pages/auth/views/login_page.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RegistrationController extends GetxController {
-  var userType = 'Normal'.obs;
+  var userType = 'normal'.obs;
 
   Future<Map<String, dynamic>> registerUser({
     required String firstName,
@@ -31,6 +32,8 @@ class RegistrationController extends GetxController {
     );
 
     if (response.statusCode == 200) {
+      Get.snackbar("Success", "User registered successfully!");
+      Get.offAll(() => LoginPage());
       return json.decode(response.body);
     } else {
       throw Exception('Failed to register');

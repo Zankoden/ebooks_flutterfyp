@@ -75,7 +75,6 @@ class ChoosePaymentGateway extends StatelessWidget {
                       ZText.zResult,
                       ZText.zSubscriptionSuccessful,
                       snackPosition: SnackPosition.BOTTOM,
-                      
                     );
                     Get.back();
                   } else {
@@ -103,16 +102,16 @@ class ChoosePaymentGateway extends StatelessWidget {
               );
             },
           ),
-          PaymentOptionCard(
-            icon: Icons.payment,
-            title: ZText.zPayPal,
-            onTap: () {},
-          ),
-          PaymentOptionCard(
-            icon: Icons.mobile_screen_share,
-            title: ZText.zMobileWallet,
-            onTap: () {},
-          ),
+          // PaymentOptionCard(
+          //   icon: Icons.payment,
+          //   title: ZText.zPayPal,
+          //   onTap: () {},
+          // ),
+          // PaymentOptionCard(
+          //   icon: Icons.mobile_screen_share,
+          //   title: ZText.zMobileWallet,
+          //   onTap: () {},
+          // ),
         ],
       ),
     );
