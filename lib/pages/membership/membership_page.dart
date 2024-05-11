@@ -54,59 +54,9 @@ class MembershipPage extends StatelessWidget {
               ListTile(
                 title: const Text(ZText.zMonthlySubscription),
                 subtitle: const Text(ZText.zMonthlyBill),
-                // onTap: () async {
-                //   Get.dialog(
-                //     AlertDialog(
-                //       title: const Text("Confirm Action"),
-                //       content: const Text(
-                //           "Are you sure you want to purchase the subscription?"),
-                //       actions: [
-                //         TextButton(
-                //           onPressed: () async {
-                //             var response = await http.post(
-                //               Uri.parse(APIService.membershipURL),
-                //               body: {
-                //                 'user_id': userId.toString(),
-                //                 'plan': 'monthly',
-                //               },
-                //             );
-
-                //             if (response.statusCode == 200) {
-                //               await profileController.getUserInfo();
-                //               await homeController.assignTempUserinfo();
-
-                //               Get.snackbar(
-                //                 "Result",
-                //                 "Subscription successful!",
-                //                 snackPosition: SnackPosition.BOTTOM,
-                //               );
-                //               Get.offAll(() => DashboardScreen());
-                //             } else {
-                //               Get.snackbar(
-                //                 "Result",
-                //                 "Subscription failed!",
-                //                 snackPosition: SnackPosition.BOTTOM,
-                //               );
-                //               Get.offAll(() => DashboardScreen());
-                //             }
-                //           },
-                //           child: const Text("Yes"),
-                //         ),
-                //         TextButton(
-                //           onPressed: () {
-                //             Get.back(); // Close the dialog
-                //           },
-                //           child: const Text("No"),
-                //         ),
-                //       ],
-                //     ),
-                //   );
-                // },
-
-                ///This is the main where payment is integrated
                 onTap: () async {
                   Get.to(const ChoosePaymentGateway(
-                    amount: 200,
+                    amount: 1000,
                     plan: 'monthly',
                   ));
                 },
@@ -114,56 +64,6 @@ class MembershipPage extends StatelessWidget {
               ListTile(
                 title: const Text(ZText.zYearlySubscription),
                 subtitle: const Text(ZText.zYearlyBill),
-                // onTap: () async {
-                //   Get.dialog(
-                //     AlertDialog(
-                //       title: const Text("Confirm Action"),
-                //       content: const Text(
-                //           "Are you sure you want to purchase the subscription?"),
-                //       actions: [
-                //         TextButton(
-                //           onPressed: () async {
-                //             var response = await http.post(
-                //               Uri.parse(APIService.membershipURL),
-                //               body: {
-                //                 'user_id': userId.toString(),
-                //                 'plan': 'yearly',
-                //               },
-                //             );
-
-                //             if (response.statusCode == 200) {
-                //               await profileController.getUserInfo();
-                //               await homeController.assignTempUserinfo();
-
-                //               Get.snackbar(
-                //                 "Result",
-                //                 "Subscription successful!",
-                //                 snackPosition: SnackPosition.BOTTOM,
-                //               );
-                //               Get.offAll(() => DashboardScreen());
-                //             } else {
-                //               Get.snackbar(
-                //                 "Result",
-                //                 "Subscription failed!",
-                //                 snackPosition: SnackPosition.BOTTOM,
-                //               );
-                //               Get.offAll(() => DashboardScreen());
-                //             }
-                //           },
-                //           child: const Text("Yes"),
-                //         ),
-                //         TextButton(
-                //           onPressed: () {
-                //             Get.back(); // Close the dialog
-                //           },
-                //           child: const Text("No"),
-                //         ),
-                //       ],
-                //     ),
-                //   );
-                // },
-
-                ///Integrated payment
                 onTap: () async {
                   Get.to(const ChoosePaymentGateway(
                     amount: 1000,

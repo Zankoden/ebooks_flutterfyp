@@ -1,7 +1,6 @@
 import 'package:ebooks/pages/home_page/controllers/home_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ebooks/pages/details_page/views/single_details_page.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 class PremiumSingleBookCard extends StatelessWidget {
@@ -122,28 +121,28 @@ class PremiumSingleBookCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Flexible(
-                child: Container(
-                  margin: const EdgeInsets.only(left: 5),
-                  child: IgnorePointer(
-                    ignoring: true,
-                    child: RatingBar.builder(
-                      initialRating: 3,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemSize: 15,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Color.fromARGB(255, 226, 232, 45),
-                      ),
-                      onRatingUpdate: (rating) {},
-                    ),
-                  ),
-                ),
-              )
+              // Flexible(
+              //   child: Container(
+              //     margin: const EdgeInsets.only(left: 5),
+              //     child: IgnorePointer(
+              //       ignoring: true,
+              //       child: RatingBar.builder(
+              //         initialRating: 3,
+              //         minRating: 1,
+              //         direction: Axis.horizontal,
+              //         allowHalfRating: true,
+              //         itemCount: 5,
+              //         itemSize: 15,
+              //         itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
+              //         itemBuilder: (context, _) => const Icon(
+              //           Icons.star,
+              //           color: Color.fromARGB(255, 226, 232, 45),
+              //         ),
+              //         onRatingUpdate: (rating) {},
+              //       ),
+              //     ),
+              //   ),
+              // )
             ],
           )),
     );

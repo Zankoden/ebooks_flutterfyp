@@ -1,9 +1,9 @@
+import 'package:ebooks/constants/text_strings.dart';
 import 'package:ebooks/extracted_widget/custom_s_curve_shape.dart';
 import 'package:ebooks/extracted_widget/home_view/app_bar.dart';
-import 'package:ebooks/extracted_widget/home_view/category_all_books_show.dart';
 import 'package:ebooks/extracted_widget/home_view/drawer_list.dart';
-import 'package:ebooks/extracted_widget/home_view/genre_list.dart';
 import 'package:ebooks/extracted_widget/home_view/monthly_launches_list.dart';
+import 'package:ebooks/extracted_widget/home_view/selected_category.dart';
 import 'package:ebooks/extracted_widget/home_view/slider_view_list.dart';
 import 'package:ebooks/extracted_widget/s_curve_shape_widget.dart';
 import 'package:ebooks/pages/home_page/controllers/home_page_controller.dart';
@@ -19,26 +19,26 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
 
-    List genresArr = [
-      {
-        "name": "Graphic Novels",
-        "img":
-            "https://static01.nyt.com/images/2020/12/10/books/00GRAPHICNOVELS-TOPTEN-COMBO/00GRAPHICNOVELS-TOPTEN-COMBO-superJumbo.jpg"
-      },
-      {
-        "name": "Graphic Novels",
-        "img":
-            "https://static01.nyt.com/images/2020/12/10/books/00GRAPHICNOVELS-TOPTEN-COMBO/00GRAPHICNOVELS-TOPTEN-COMBO-superJumbo.jpg"
-      },
-      {
-        "name": "Graphic Novels",
-        "img":
-            "https://static01.nyt.com/images/2020/12/10/books/00GRAPHICNOVELS-TOPTEN-COMBO/00GRAPHICNOVELS-TOPTEN-COMBO-superJumbo.jpg"
-      }
-    ];
+    // List genresArr = [
+    //   {
+    //     "name": "Graphic Novels",
+    //     "img":
+    //         "https://static01.nyt.com/images/2020/12/10/books/00GRAPHICNOVELS-TOPTEN-COMBO/00GRAPHICNOVELS-TOPTEN-COMBO-superJumbo.jpg"
+    //   },
+    //   {
+    //     "name": "Graphic Novels",
+    //     "img":
+    //         "https://static01.nyt.com/images/2020/12/10/books/00GRAPHICNOVELS-TOPTEN-COMBO/00GRAPHICNOVELS-TOPTEN-COMBO-superJumbo.jpg"
+    //   },
+    //   {
+    //     "name": "Graphic Novels",
+    //     "img":
+    //         "https://static01.nyt.com/images/2020/12/10/books/00GRAPHICNOVELS-TOPTEN-COMBO/00GRAPHICNOVELS-TOPTEN-COMBO-superJumbo.jpg"
+    //   }
+    // ];
 
     return Scaffold(
-      endDrawer: const DrawerListWidget(),
+      endDrawer: DrawerListWidget(),
       body: SingleChildScrollView(
         child: Expanded(
           child: Column(
@@ -70,13 +70,17 @@ class HomePage extends StatelessWidget {
                       SizedBox(
                         height: media.width * 0.1,
                       ),
-                      const AppBarWidget(),
+                      const AppBarWidget(
+                        appBarTitle: ZText.zOurTopRecommendations,
+                        appBarTitleColor: Colors.white,
+                      ),
                       SliderView(media: media, controller: controller),
                       MonthlyLaunchesListView(
                           media: media, controller: controller),
-                      CategoryBooksListView(
-                          media: media, controller: controller),
-                      GenreListView(media: media, genresArr: genresArr),
+                      // CategoryBooksListView(
+                      //     media: media, controller: controller),
+                      SelectedCategory(media: media, controller: controller),
+                      // GenreListView(media: media, genresArr: genresArr),
                       SizedBox(
                         height: media.width * 0.1,
                       ),

@@ -41,6 +41,7 @@ class ZText {
   static const String zExplore = "Explore";
   static const String zSearchFavBooks = "Search Your Fav Books Here";
   static const String zEgShreemadGeeta = "eg: Shreemad Bhagavada Geeta";
+  static const String onTheroad = "eg: On The Road";
   static const String zNoResultsFound = "No results found";
 
   //Favourites Page

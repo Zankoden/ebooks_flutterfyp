@@ -45,7 +45,7 @@ class ExplorePage extends StatelessWidget {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: BorderSide.none),
-                    hintText: ZText.zEgShreemadGeeta,
+                    hintText: ZText.onTheroad,
                     hintStyle: const TextStyle(
                         color: Color.fromARGB(255, 146, 145, 145)),
                     prefixIcon: const Icon(Icons.search),

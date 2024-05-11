@@ -1,9 +1,11 @@
-import 'package:ebooks/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget {
+  final String appBarTitle; 
+  final Color appBarTitleColor; 
   const AppBarWidget({
     super.key,
+    required this.appBarTitle, required this.appBarTitleColor,
   });
 
   @override
@@ -11,13 +13,13 @@ class AppBarWidget extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: const Row(
+      title: Row(
         children: [
           Flexible(
             child: Text(
-              ZText.zOurTopRecommendations,
-              style: TextStyle(
-                  color: Colors.white,
+              appBarTitle,
+              style:  TextStyle(
+                  color: appBarTitleColor,
                   fontSize: 22,
                   fontWeight: FontWeight.w700),
             ),

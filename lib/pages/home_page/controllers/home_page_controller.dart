@@ -21,6 +21,8 @@ class HomePageController extends GetxController {
   RxList<Ebook> premiumBooks = <Ebook>[].obs;
   RxList<Ebook> recentlyViewedBooks = <Ebook>[].obs;
 
+  RxList<Category> filteredCategories = <Category>[].obs;
+
   int interstitialLoadAttempts = 0;
   InterstitialAd? interstitialAd;
   late Box box;
@@ -32,6 +34,7 @@ class HomePageController extends GetxController {
     getBooks();
     getCategories();
     getCurrentMonthBooks();
+    filterCategories();
   }
 
   void createInterstitialAd() {
@@ -196,5 +199,14 @@ class HomePageController extends GetxController {
 
   void closeDrawer() {
     isDrawerOpen.value = false;
+  }
+
+  void filterCategories() {
+    filteredCategories.value = categories
+        .where((category) =>
+            category.categoryName == 'Encyclopedia' ||
+            category.categoryName == 'Biography')
+        .toList()
+        .obs;
   }
 }

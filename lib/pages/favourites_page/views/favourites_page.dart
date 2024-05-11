@@ -1,4 +1,5 @@
 import 'package:ebooks/constants/text_strings.dart';
+import 'package:ebooks/pages/details_page/views/single_details_page.dart';
 import 'package:ebooks/pages/explore_page/views/explore_page.dart';
 import 'package:ebooks/pages/favourites_page/controllers/favourites_controller.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +154,21 @@ class FavouritesPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final book = favouritesController.favoriteBooks[index];
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.back();
+
+                        // Get.to(
+                        //   () => SingleBookDetails(
+                        //     bookName: book['bookName'] ?? 'Default',
+                        //     imagePath: book['imagePath'] ?? '',
+                        //     pdfFilePath: pdfFilePath,
+                        //     ebookID: ebookID,
+                        //     authorName: authorName,
+                        //     bookData: const {},
+                        //     description: description,
+                        //   ),
+                        // );
+                      },
                       child: Column(
                         children: [
                           Container(
@@ -177,8 +192,8 @@ class FavouritesPage extends StatelessWidget {
                               ),
                               child: Image.network(
                                 book['imagePath'] ?? '',
-                                width: 300,
-                                height: 250,
+                                width: 130,
+                                height: 200,
                                 fit: BoxFit.cover,
                               ),
                             ),
