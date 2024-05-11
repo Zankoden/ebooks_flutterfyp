@@ -35,7 +35,7 @@ class SingleBookDetailsController extends GetxController {
     try {
       var response = await http.get(Uri.parse(APIService.fetchEbooksURL));
 
-      log("Single fetch books response: ${response.body}");
+      // log("Single fetch books response: ${response.body}");
 
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
@@ -67,9 +67,9 @@ class SingleBookDetailsController extends GetxController {
 
   void getRecommendedBooks() {
     getBooks();
-    log("Single Fetch books list: $books");
-    log("--------start of Single getRecommendedBooks-----🔥------------");
-    log("Recommended list: $recommendedBooksList");
+    // log("Single Fetch books list: $books");
+    // log("--------start of Single getRecommendedBooks-----🔥------------");
+    // log("Recommended list: $recommendedBooksList");
     if (books.isEmpty) return;
 
     recommendedBooksList.clear();
@@ -92,12 +92,12 @@ class SingleBookDetailsController extends GetxController {
         }
       }
     }
-    log("-------------🗿------------");
-    log("Recommended list: $recommendedBooksList");
+    // log("-------------🗿------------");
+    // log("Recommended list: $recommendedBooksList");
   }
 
   void getRecommendedCategoryBooks() {
-    log("-------------🔥----start of getRecommendedCategoryBooks--------");
+    // log("-------------🔥----start of getRecommendedCategoryBooks--------");
     if (books.isEmpty) return;
 
     Map<int, List<double>> categoryRatings = {};
@@ -144,6 +144,6 @@ class SingleBookDetailsController extends GetxController {
 
     recommendedCategoryList.shuffle();
 
-    log("Recommended Category list: $recommendedCategoryList");
+    // log("Recommended Category list: $recommendedCategoryList");
   }
 }

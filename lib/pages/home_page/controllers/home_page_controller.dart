@@ -79,7 +79,7 @@ class HomePageController extends GetxController {
     try {
       var response = await http.get(Uri.parse(APIService.fetchEbooksURL));
 
-      log("Fetch Ebooks: ${response.body}");
+      // log("Fetch Home Page Ebooks: ${response.body}");
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         if (jsonData is List) {
@@ -119,7 +119,6 @@ class HomePageController extends GetxController {
         final Map<String, dynamic> data = json.decode(response.body);
         if (data['success']) {
           userInfo.value = data['user_info'];
-          log("Test home user: ${userInfo.value}");
         } else {
           log('Failed to get user info: ${data['message']}');
         }

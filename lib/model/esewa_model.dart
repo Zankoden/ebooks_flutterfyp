@@ -59,7 +59,7 @@ class Esewa {
               ZText.zSubscriptionFailed,
             );
           }
-          Get.offAll(DashboardScreen());
+          Get.offAll(() => DashboardScreen());
         },
         onPaymentFailure: (data) {
           debugPrint(":::FAILURE::: => $data");

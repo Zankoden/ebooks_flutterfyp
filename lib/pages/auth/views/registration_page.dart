@@ -118,15 +118,29 @@ class RegistrationPage extends StatelessWidget {
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                _registrationController.registerUser(
-                  firstName: _firstNameController.text,
-                  lastName: _lastNameController.text,
-                  username: _usernameController.text,
-                  email: _emailController.text,
-                  phoneNumber: _phoneNumberController.text,
-                  password: _passwordController.text,
-                  userType: _registrationController.userType.value,
-                );
+                if (_firstNameController.text.isEmpty ||
+                    _lastNameController.text.isEmpty ||
+                    _usernameController.text.isEmpty ||
+                    _emailController.text.isEmpty ||
+                    _phoneNumberController.text.isEmpty ||
+                    _passwordController.text.isEmpty) {
+                  // Show validation error message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please fill all fields properly'),
+                    ),
+                  );
+                } else {
+                  _registrationController.registerUser(
+                    firstName: _firstNameController.text,
+                    lastName: _lastNameController.text,
+                    username: _usernameController.text,
+                    email: _emailController.text,
+                    phoneNumber: _phoneNumberController.text,
+                    password: _passwordController.text,
+                    userType: _registrationController.userType.value,
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
@@ -142,6 +156,33 @@ class RegistrationPage extends StatelessWidget {
                 ),
               ),
             ),
+
+            // ElevatedButton(
+            //   onPressed: () {
+            //     _registrationController.registerUser(
+            //       firstName: _firstNameController.text,
+            //       lastName: _lastNameController.text,
+            //       username: _usernameController.text,
+            //       email: _emailController.text,
+            //       phoneNumber: _phoneNumberController.text,
+            //       password: _passwordController.text,
+            //       userType: _registrationController.userType.value,
+            //     );
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: Colors.blue,
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(10.0),
+            //     ),
+            //   ),
+            //   child: const Text(
+            //     ZText.zRegister,
+            //     style: TextStyle(
+            //       fontSize: 18,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: 20),
             GestureDetector(
               onTap: () {

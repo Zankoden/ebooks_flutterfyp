@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreenController extends GetxController {
-  
   @override
   void onInit() {
     super.onInit();
@@ -18,9 +17,9 @@ class SplashScreenController extends GetxController {
 
     Timer(const Duration(seconds: 2), () async {
       if (userIsLogged(userId)) {
-        Get.offAll(DashboardScreen());
+        Get.offAll(() => DashboardScreen());
       } else {
-        Get.offAll(LoginPage());
+        Get.offAll(() => LoginPage());
       }
     });
   }

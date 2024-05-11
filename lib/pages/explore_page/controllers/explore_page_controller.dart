@@ -129,8 +129,8 @@ class ExplorePageController extends GetxController {
 
   void getRecommendedBooks() {
     getBooks();
-    log("--------start of getRecommendedBooks-----🔥------------");
-    log("Recommended list: $recommendedBooksList");
+    // log("--------start of getRecommendedBooks-----🔥------------");
+    // log("Recommended list: $recommendedBooksList");
     if (books.isEmpty) return;
 
     recommendedBooksList.clear();
@@ -153,12 +153,12 @@ class ExplorePageController extends GetxController {
         }
       }
     }
-    log("-------------🗿------------");
-    log("Recommended list: $recommendedBooksList");
+    // log("-------------🗿------------");
+    // log("Recommended list: $recommendedBooksList");
   }
 
   void getRecommendedCategoryBooks() {
-    log("-------------🔥----start of getRecommendedCategoryBooks--------");
+    // log("-------------🔥----start of getRecommendedCategoryBooks--------");
     if (books.isEmpty) return;
 
     Map<int, List<double>> categoryRatings = {};
@@ -203,6 +203,6 @@ class ExplorePageController extends GetxController {
 
     recommendedCategoryList = recommendedCategoryList.toSet().toList().obs;
 
-    log("Recommended Category list: $recommendedCategoryList");
+    // log("Recommended Category list: $recommendedCategoryList");
   }
 }

@@ -13,7 +13,6 @@ class EditProfilePageController extends GetxController {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController profilePicController = TextEditingController();
 
   Rx<Map<String, dynamic>?> userInfo = Rx<Map<String, dynamic>?>(null);
   Rx<File?> profileImageFile = Rx<File?>(null);
@@ -44,7 +43,6 @@ class EditProfilePageController extends GetxController {
           lastNameController.text = userInfo.value!['last_name'];
           emailController.text = userInfo.value!['email'];
           phoneNumberController.text = userInfo.value!['phone_number'];
-          profilePicController.text = userInfo.value!['profile_image_url'];
         } else {
           log('Failed to get user info: ${data['message']}');
         }
@@ -59,25 +57,38 @@ class EditProfilePageController extends GetxController {
     String lastName,
     String email,
     String phoneNumber,
-    String profilePic,
+    File? profileImageFile,
   ) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int? userId = prefs.getInt('user_id');
 
     if (userId != null) {
-      final response = await http.post(
+      var request = http.MultipartRequest(
+        'POST',
         Uri.parse(APIService.updateUserInfo),
-        body: {
-          'user_id': userId.toString(),
-          'first_name': firstName,
-          'last_name': lastName,
-          'email': email,
-          'phone_number': phoneNumber,
-          'profile_image_url': profilePic,
-        },
       );
+      request.fields['user_id'] = userId.toString();
+      request.fields['first_name'] = firstName;
+      request.fields['last_name'] = lastName;
+      request.fields['email'] = email;
+      request.fields['phone_number'] = phoneNumber;
+
+      if (profileImageFile != null) {
+        final fileName = profileImageFile.path.split('/').last;
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'profile_image',
+            profileImageFile.path,
+            filename: fileName,
+          ),
+        );
+      }
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
+        Get.snackbar("Success", "The user data is successfully updated");
         try {
           final Map<String, dynamic> data = json.decode(response.body);
           if (data['success']) {
@@ -91,8 +102,6 @@ class EditProfilePageController extends GetxController {
       } else {
         log('Failed to update user info: ${response.reasonPhrase}');
       }
-
-      log("Response Status code: ${response.statusCode}");
     }
   }
 

@@ -22,4 +22,5 @@ class APIService {
   static const String updateUserInfo = '$baseURL/update_user_info.php';
   static const String loginURL = '$baseURL/login.php';
   static const String registerURL = '$baseURL/register.php';
+  static const String changePasswordURL = '$baseURL/change_password.php';
 }

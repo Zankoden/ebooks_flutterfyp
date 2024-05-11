@@ -21,7 +21,7 @@ class FavouritesController extends GetxController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       int? userId = prefs.getInt('user_id');
 
-      log("Ebook id fav add: $ebookID");
+      // log("Ebook id fav add: $ebookID");
 
       String ebookIdString = ebookID.toString();
 

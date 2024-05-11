@@ -1,3 +1,4 @@
+import 'package:ebooks/pages/profile/views/change_password.dart';
 import 'package:ebooks/pages/profile/views/edit_profile_page.dart';
 import 'package:ebooks/themes/controller/theme_controller.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,9 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 16),
-              const InkWell(
-                child: Row(
+              InkWell(
+                onTap: () => Get.to(() => ChangePasswordPage()),
+                child: const Row(
                   children: [
                     SizedBox(width: 18),
                     Icon(Iconsax.lock),
