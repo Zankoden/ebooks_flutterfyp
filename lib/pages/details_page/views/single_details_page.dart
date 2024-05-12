@@ -115,12 +115,22 @@ class SingleBookDetails extends StatelessWidget {
                                     ElevatedButton(
                                       onPressed: () async {
                                         if (pdfFilePath.isNotEmpty) {
-                                          controller.showInterstitialAd();
-                                          await Future.delayed(
-                                            const Duration(seconds: 1),
-                                          );
-                                          Get.to(() =>
-                                              PdfViewPage(pdfUrl: pdfFilePath));
+                                          final userPlan = controller
+                                              .userInfo.value?['plan'];
+                                          if (userPlan == 'monthly' ||
+                                              userPlan == 'yearly') {
+                                            await controller
+                                                .assignTempUserinfo();
+                                            Get.to(() => PdfViewPage(
+                                                pdfUrl: pdfFilePath));
+                                          } else {
+                                            controller.showInterstitialAd();
+                                            await Future.delayed(
+                                              const Duration(seconds: 1),
+                                            );
+                                            Get.to(() => PdfViewPage(
+                                                pdfUrl: pdfFilePath));
+                                          }
                                         } else {
                                           showDialog(
                                             context: context,
@@ -242,58 +252,6 @@ class SingleBookDetails extends StatelessWidget {
     );
   }
 }
-
-// class PdfViewPage extends StatelessWidget {
-//   final String pdfUrl;
-
-//   const PdfViewPage({super.key, required this.pdfUrl});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text(ZText.zPDFViewer),
-//       ),
-//       body: FutureBuilder(
-//         future: DefaultCacheManager().getSingleFile(pdfUrl),
-//         builder: (context, snapshot) {
-//           if (snapshot.connectionState == ConnectionState.done) {
-//             if (snapshot.hasError) {
-//               log("second if mai adkiyo pdf");
-//               return Center(child: Text('Error: ${snapshot.error}'));
-//             } else if (snapshot.data is File) {
-//               log("aayo aayo pdf aayo");
-//               File pdfFile = snapshot.data as File;
-//               return PDFView(
-//                 filePath: pdfFile.path,
-//                 enableSwipe: true,
-//                 swipeHorizontal: false,
-//                 autoSpacing: false,
-//                 pageSnap: true,
-//                 pageFling: false,
-//                 onRender: (pages) {
-//                   log("PDF rendered");
-//                 },
-//                 onError: (error) {
-//                   log(error.toString());
-//                 },
-//                 onPageError: (page, error) {
-//                   log('$page: ${error.toString()}');
-//                 },
-//                 onViewCreated: (PDFViewController pdfViewController) {},
-//               );
-//             }
-//           } else if (snapshot.connectionState == ConnectionState.waiting) {
-//             log("First else mai askiyo pdf");
-//             return const Center(child: CircularProgressIndicator());
-//           }
-
-//           return const Center(child: Text(ZText.zPDFLoading));
-//         },
-//       ),
-//     );
-//   }
-// }
 
 class PdfViewPage extends StatelessWidget {
   final String pdfUrl;

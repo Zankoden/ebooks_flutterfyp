@@ -72,7 +72,28 @@ class DrawerListWidget extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            profileController.logout();
+                            Get.dialog(
+                              AlertDialog(
+                                title: const Text(ZText.zConfirmAction),
+                                content: const Text(
+                                    "Are you sure you want to log out? You need to type in your credentials again for login!"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    child: const Text(ZText.zNo),
+                                  ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      profileController.logout();
+                                    },
+                                    child: const Text(ZText.zYes),
+                                  ),
+                                ],
+                              ),
+                            );
+                            // profileController.logout();
                           },
                           child: const Row(
                             children: [
