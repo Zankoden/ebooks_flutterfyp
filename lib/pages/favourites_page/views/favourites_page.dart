@@ -157,17 +157,17 @@ class FavouritesPage extends StatelessWidget {
                       onTap: () {
                         Get.back();
 
-                        // Get.to(
-                        //   () => SingleBookDetails(
-                        //     bookName: book['bookName'] ?? 'Default',
-                        //     imagePath: book['imagePath'] ?? '',
-                        //     pdfFilePath: pdfFilePath,
-                        //     ebookID: ebookID,
-                        //     authorName: authorName,
-                        //     bookData: const {},
-                        //     description: description,
-                        //   ),
-                        // );
+                        Get.to(
+                          () => SingleBookDetails(
+                            bookName: book['bookName'] ?? 'Default',
+                            imagePath: book['imagePath'] ?? '',
+                            pdfFilePath: book['pdf_url'] ?? '',
+                            ebookID: book['ebook_id'] ?? -1,
+                            authorName: "Itadori Yuji",
+                            bookData: const {},
+                            description: book['description'] ?? '',
+                          ),
+                        );
                       },
                       child: Column(
                         children: [
@@ -191,7 +191,8 @@ class FavouritesPage extends StatelessWidget {
                                 topRight: Radius.circular(10),
                               ),
                               child: Image.network(
-                                book['imagePath'] ?? '',
+                                book['imagePath'] ??
+                                    'https://www.lincolnca.gov//en/resourcesGeneral/defaultimages/default-book.png',
                                 width: 130,
                                 height: 200,
                                 fit: BoxFit.cover,

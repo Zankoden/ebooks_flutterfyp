@@ -34,7 +34,8 @@ class HomePageController extends GetxController {
     getBooks();
     getCategories();
     getCurrentMonthBooks();
-    filterCategories();
+    // filterCategories();
+    assignTempUserinfo();
   }
 
   void createInterstitialAd() {
@@ -118,6 +119,8 @@ class HomePageController extends GetxController {
         },
       );
 
+      log("Updated home profile fetch: ${response.body}");
+
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         if (data['success']) {
@@ -182,6 +185,7 @@ class HomePageController extends GetxController {
   Future<void> getCategories() async {
     try {
       categories.value = await fetchCategories();
+      filterCategories();
     } catch (e) {
       log("$e");
     }
@@ -206,7 +210,7 @@ class HomePageController extends GetxController {
         .where((category) =>
             category.categoryName == 'Encyclopedia' ||
             category.categoryName == 'Biography')
-        .toList()
-        .obs;
+        .toList();
+    log("Filtered categories: $filteredCategories");
   }
 }

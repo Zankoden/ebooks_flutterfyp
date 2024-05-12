@@ -79,7 +79,8 @@ class HomePage extends StatelessWidget {
                           media: media, controller: controller),
                       // CategoryBooksListView(
                       //     media: media, controller: controller),
-                      SelectedCategory(media: media, controller: controller),
+                      SelectedCategory(),
+
                       // GenreListView(media: media, genresArr: genresArr),
                       SizedBox(
                         height: media.width * 0.1,

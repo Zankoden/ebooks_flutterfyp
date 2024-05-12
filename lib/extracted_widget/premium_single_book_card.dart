@@ -27,8 +27,8 @@ class PremiumSingleBookCard extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return InkWell(
       onTap: () async {
-        if (homePageController.userInfo.value?['plan'] == 'monthly' ||
-            homePageController.userInfo.value?['plan'] == 'yearly') {
+        final userPlan = homePageController.userInfo.value?['plan'];
+        if (userPlan == 'monthly' || userPlan == 'yearly') {
           await homePageController.assignTempUserinfo();
           Get.to(() => SingleBookDetails(
                 bookName: bookName,
@@ -39,8 +39,7 @@ class PremiumSingleBookCard extends StatelessWidget {
                 bookData: const {},
                 authorName: authorName,
               ));
-        } else if (homePageController.userInfo.value?['plan'] != 'monthly' ||
-            homePageController.userInfo.value?['plan'] != 'yearly') {
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content:

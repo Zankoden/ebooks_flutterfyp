@@ -67,10 +67,14 @@ class FavouritesController extends GetxController {
 
         for (var item in data) {
           Map<String, dynamic> bookMap = {
+            'ebook_id': item['ebook_id'] ?? '',
             'bookName': item['title'] ?? '',
+            'author_id': item['author_id'] ?? '',
+            'description': item['description'] ?? '',
+            'pdf_url': "${APIService.baseURL}/${item['pdf_url']}",
+            'category_id': item['category_id'],
             'imagePath': "${APIService.baseURL}/${item['thumbnail_url']}",
-            'pdfFilePath': "${APIService.baseURL}/${item['pdf_url']}",
-            'ebookID': item['ebook_id'] ?? '',
+            'uploaded_date': item['uploaded_date'] ?? '',
           };
 
           parsedData.add(bookMap);
